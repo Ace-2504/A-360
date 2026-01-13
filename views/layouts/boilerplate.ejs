@@ -12,10 +12,11 @@
 </head>
 <body class="d-flex flex-column vh-100">
     <%- include("../includes/navbar.ejs") %>
-
-    <div class="container mt-4 flex-grow-1">
-        <%- body %>
+    <div class="container">
+        <%- include("../includes/flash.ejs") %> <%- body %>
     </div>
+
+  
 
     <footer class="f-info py-3 mt-4 border-top">
         <div class="f-info-socials mb-2">

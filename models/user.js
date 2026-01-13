@@ -15,8 +15,8 @@ const userSchema = new Schema({
 });
 
 if (typeof passportLocalMongoose === "function") {
-    userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose);
 } else if (typeof passportLocalMongoose.default === "function") {
-    userSchema.plugin(passportLocalMongoose.default);
+userSchema.plugin(passportLocalMongoose.default);
 }
 module.exports = mongoose.model("User", userSchema);
