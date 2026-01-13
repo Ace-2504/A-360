@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Property = require("../models/property");
+const Review = require("../models/review.js");
 const { isLoggedIn, isAdmin } = require("../middleware.js");
 
 router.get("/", async (req, res) => {
@@ -69,6 +70,40 @@ router.post("/:id/reject", isLoggedIn, isAdmin, async (req, res) => {
     await Property.findByIdAndUpdate(id, { status: "rejected", adminFeedback: feedback || "Does not match verification criteria"});
     req.flash("error", "Property rejected.");
     res.redirect("/properties/admin/dashboard");
+});
+
+router.post("/:id/reviews", isLoggedIn, async (req, res) => {
+    const property = await Property.findById(req.params.id);
+    const newReview = new Review(req.body.review);
+    
+    newReview.author = req.user._id; 
+    property.reviews.push(newReview);
+
+    await newReview.save();
+    await property.save();
+
+    req.flash("success", "Review added successfully!");
+    res.redirect(`/properties/${property._id}`);
+});
+
+router.delete("/:id/reviews/:reviewId", isLoggedIn, async (req, res) => {
+    let { id, reviewId } = req.params;
+
+    await Property.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    await Review.findByIdAndDelete(reviewId);
+
+    req.flash("success", "Review deleted!");
+    res.redirect(`/properties/${id}`);
+});
+
+router.get("/:id", async (req, res) => {
+    const property = await Property.findById(req.params.id)
+        .populate({
+            path: "reviews",
+            populate: { path: "author" } 
+        })
+        .populate("owner");
+    res.render("properties/show.ejs", { property });
 });
 
 module.exports = router;
