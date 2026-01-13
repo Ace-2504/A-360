@@ -1,0 +1,52 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-4">
+    <h2 class="mb-4">Admin Verification Queue</h2>
+    
+    <% if (pendingProperties.length > 0) { %>
+        <div class="table-responsive shadow-sm rounded">
+            <table class="table table-hover align-middle bg-white">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Property</th>
+                        <th>Owner</th>
+                        <th>Location</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let prop of pendingProperties) { %>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="<%= prop.image.url %>" class="rounded me-3" style="width: 60px; height: 40px; object-fit: cover;">
+                                    <strong><%= prop.title %></strong>
+                                </div>
+                            </td>
+                            <td><%= prop.owner ? prop.owner.username : "Unknown" %></td>
+                            <td><%= prop.location %></td>
+                            <td>$<%= prop.price %></td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <form action="/properties/<%= prop._id %>/approve" method="POST">
+                                        <button class="btn btn-sm btn-success">Approve</button>
+                                    </form>
+                                    <form action="/properties/<%= prop._id %>/reject" method="POST">
+                                        <input type="text" name="feedback" class="form-control form-control-sm mb-1" placeholder="Reason for rejection..." required>
+                                        <button class="btn btn-sm btn-outline-danger">Reject</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    <% } else { %>
+        <div class="alert alert-secondary text-center py-5">
+            <h4>No properties pending verification.</h4>
+            <p>You're all caught up!</p>
+        </div>
+    <% } %>
+</div>

@@ -1,0 +1,31 @@
+<% layout("/layouts/boilerplate") %>
+<div class="row mt-3">
+    <div class="col-8 offset-2">
+        <h3>List Your Property for A-360 Verification</h3>
+        <form action="/properties" method="POST" novalidate class="needs-validation">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input name="property[title]" type="text" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea name="property[description]" class="form-control" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image URL</label>
+                <input name="property[image]" type="text" class="form-control" required>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="price" class="form-label">Price</label>
+                    <input name="property[price]" type="number" class="form-control" required>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="location" class="form-label">Location</label>
+                    <input name="property[location]" type="text" class="form-control" required>
+                </div>
+            </div>
+            <button class="btn btn-success w-100">Submit to Admin</button>
+        </form>
+    </div>
+</div>

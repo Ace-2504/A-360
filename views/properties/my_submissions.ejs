@@ -1,0 +1,44 @@
+<% layout("/layouts/boilerplate") %>
+<div class="container mt-4">
+    <h2 class="mb-4">My Property Submissions</h2>
+    
+    <div class="row">
+        <% if (userProperties.length > 0) { %>
+            <% for(let prop of userProperties) { %>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <img src="<%= prop.image.url %>" class="card-img-top" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold"><%= prop.title %></h5>
+                            
+                            <% if(prop.status === 'pending') { %>
+                                <span class="badge bg-warning text-dark mb-2">Under Review</span>
+                            <% } else if(prop.status === 'approved') { %>
+                                <span class="badge bg-success mb-2">Live & Verified</span>
+                            <% } else { %>
+                                <span class="badge bg-danger mb-2">Rejected</span>
+                            <% } %>
+
+                            <p class="text-muted small mb-2"><i class="fa-solid fa-location-dot me-1"></i> <%= prop.location %></p>
+                            
+                            <% if(prop.status === 'rejected' && prop.adminFeedback) { %>
+                                <div class="alert alert-danger py-2 mt-2">
+                                    <strong class="small">Admin Feedback:</strong>
+                                    <p class="mb-0 small"><%= prop.adminFeedback %></p>
+                                </div>
+                            <% } %>
+                        </div>
+                        <div class="card-footer bg-white border-0 pb-3">
+                            <a href="/properties/<%= prop._id %>" class="btn btn-sm btn-outline-dark w-100">View Listing</a>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        <% } else { %>
+            <div class="col-12 text-center py-5">
+                <p class="text-muted">You haven't submitted any properties yet.</p>
+                <a href="/properties/new" class="btn btn-primary">Start Your First Listing</a>
+            </div>
+        <% } %>
+    </div>
+</div>

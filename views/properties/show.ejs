@@ -1,0 +1,75 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <h2 class="fw-bold mb-3"><%= property.title %></h2>
+            
+            <div class="card border-0 shadow-sm mb-4">
+                <img src="<%= property.image.url %>" class="card-img-top rounded show-img" alt="property image">
+                <div class="card-body px-0">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="badge bg-success py-2 px-3">
+                            <i class="fa-solid fa-shield-check me-2"></i>A-360 Verified Property
+                        </span>
+                        <span class="text-muted ms-3">
+                            <i class="fa-solid fa-location-dot me-1"></i><%= property.location %>, <%= property.country %>
+                        </span>
+                    </div>
+                    
+                    <h4 class="fw-bold mt-4">About this space</h4>
+                    <p class="text-muted lead" style="white-space: pre-line;">
+                        <%= property.description %>
+                    </p>
+                    <hr>
+                    
+                
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card shadow border-0 sticky-top" style="top: 100px; z-index: 10;">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-4">$<%= property.price.toLocaleString() %> <span class="fs-6 fw-normal text-muted">/ month</span></h3>
+                    
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-dark btn-lg py-3 fw-bold">Contact Relocator</button>
+                        <button class="btn btn-outline-secondary">Save to Wishlist</button>
+                    </div>
+
+                    <div class="mt-4 p-3 bg-light rounded">
+                        <p class="mb-1 small text-muted text-uppercase fw-bold">Listed by</p>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                <%= property.owner.username[0].toUpperCase() %>
+                            </div>
+                            <div>
+                                <h6 class="mb-0 fw-bold"><%= property.owner.username %></h6>
+                                <small class="text-muted">A-360 Member</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <small class="text-muted">
+                            <i class="fa-solid fa-circle-info me-1"></i> 
+                            This property has undergone a 5-point verification check by our relocation team.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .show-img {
+        height: 450px;
+        object-fit: cover;
+        width: 100%;
+    }
+    .badge {
+        font-size: 0.9rem;
+    }
+</style>

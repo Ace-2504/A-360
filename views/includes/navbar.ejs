@@ -9,13 +9,36 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
+                
                 <li class="nav-item">
                     <a class="nav-link" href="/properties">Explore Properties</a>
                 </li>
             </ul>
             <div class="navbar-nav ms-auto">
-                <a class="nav-link fw-semibold" href="/signup">Sign up</a>
-                <a class="nav-link fw-semibold" href="/login">Log in</a>
+                <ul class="navbar-nav ms-auto">
+        <% if(!currUser) { %>
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="/signup">Sign up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Log in</a>
+          </li>
+        <% } %>
+
+        <% if(currUser) { %>
+          <% if(currUser.role === 'admin') { %>
+            <li class="nav-item">
+              <a class="nav-link text-primary fw-bold" href="properties/admin/dashboard">Admin Panel</a>
+            </li>
+          <% } %>
+            <li class="nav-item">
+                <a class="nav-link" href="/properties/my-submissions">My Submissions</a>
+            </li>
+          <li class="nav-item">
+            <a class="nav-link text-danger" href="/logout">Logout</a>
+          </li>
+        <% } %>
+      </ul>
             </div>
         </div>
     </div>

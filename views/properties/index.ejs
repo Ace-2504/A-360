@@ -1,8 +1,46 @@
 <% layout("/layouts/boilerplate") %>
-<div class="row mt-3">
-    <div class="col-8 offset-2 text-center">
-        <h1>Welcome to A-360</h1>
-        <p class="lead">Relocation Simplified. Properties, Movers, and Furniture in one place.</p>
-        <button class="btn btn-primary btn-search">Explore Now</button>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Verified Properties</h2>
+        <a href="/properties/new" class="btn btn-outline-success">
+            <i class="fa-solid fa-plus me-2"></i>List Your Property
+        </a>
+    </div>
+
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4">
+        <% if (allProperties.length > 0) { %>
+            <% for(let property of allProperties) { %>
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0 property-card">
+                        <img src="<%= property.image.url %>" class="card-img-top" alt="property" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold"><%= property.title %></h5>
+                            <p class="card-text text-muted mb-1">
+                                <i class="fa-solid fa-location-dot me-2"></i><%= property.location %>, <%= property.country %>
+                            </p>
+                            <p class="card-text">
+                                <span class="fw-bold text-success">$<%= property.price.toLocaleString() %></span> / month
+                            </p>
+                            <div class="d-grid">
+                                <a href="/properties/<%= property._id %>" class="btn btn-dark">View Details</a>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 pb-3">
+                            <span class="badge rounded-pill bg-info text-dark">
+                                <i class="fa-solid fa-check-double me-1"></i>A-360 Verified
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        <% } else { %>
+            <div class="col-12 text-center py-5">
+                <img src="https://illustrations.popsy.co/gray/home-office.svg" alt="empty" style="width: 200px;" class="mb-3">
+                <h4>No verified properties yet.</h4>
+                <p class="text-muted">Check back later or submit your own property for verification!</p>
+            </div>
+        <% } %>
     </div>
 </div>
+
