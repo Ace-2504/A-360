@@ -126,9 +126,12 @@
                     <h3 class="fw-bold mb-4">₹<%= property.price.toLocaleString() %> <span class="fs-6 fw-normal text-muted">/ month</span></h3>
                     
                     <div class="d-grid gap-2">
-                        <button class="btn btn-dark btn-lg py-3 fw-bold">Contact Relocator</button>
-                        <button class="btn btn-outline-secondary">Save to Wishlist</button>
+                        <button class="btn btn-dark btn-lg py-3 fw-bold" onclick="revealContact('<%= property._id %>')">Contact Owner</button>
+                        
                     </div>
+                    <div id="contact-details" class="mt-3 p-3 border rounded bg-light" style="display: none;">
+                        <p class="mb-1"><strong>Email:</strong> <span id="disp-email"></span></p>
+                        <p class="mb-3"><strong>Mobile:</strong> <span id="disp-phone"></span></p>
 
                     <div class="mt-4 p-3 bg-light rounded">
                         <p class="mb-1 small text-muted text-uppercase fw-bold">Listed by</p>
@@ -165,3 +168,29 @@
         font-size: 0.9rem;
     }
 </style>
+
+<script>
+async function revealContact(id) {
+    try {
+        const response = await fetch(`/properties/${id}/contact`, {
+            headers: { 'Accept': 'application/json' },
+            credentials: 'same-origin'
+        });
+        if (response.status === 401) {
+            window.location.href = "/login";
+            return;
+        }
+        const data = await response.json();
+        if (response.ok) {
+            document.getElementById('disp-email').innerText = data.email;
+            document.getElementById('disp-phone').innerText = data.phone;
+            document.getElementById('contact-details').style.display = 'block';
+        } else {
+            window.location.href = "/login";
+        }
+    } catch (err) {
+        console.error("Error:", err);
+        window.location.href = "/login";
+    }
+}
+</script>

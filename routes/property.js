@@ -134,4 +134,23 @@ router.get("/:id", async (req, res) => {
     res.render("properties/show.ejs", { property });
 });
 
+router.get("/:id/contact", isLoggedIn, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const property = await Property.findById(id).populate('owner');
+        if (!property) {
+            return res.status(404).json({ error: "Property not found" });
+        }
+        if (!property.owner) {
+            return res.status(404).json({ error: "Owner not found" });
+        }
+        res.json({
+            email: property.owner.email,
+            phone: property.owner.mobile
+        });
+    } catch (e) {
+        res.status(500).json({ error: "Server error" });
+    }
+});
+
 module.exports = router;

@@ -1,5 +1,4 @@
 const sampleProperties = [
-
     {
         title: "The Heritage Villa",
         description: "Classic architecture with a private garden and pool.",
@@ -13,7 +12,9 @@ const sampleProperties = [
         bhk: "4 BHK",
         furnishing: "Unfurnished",
         status: "approved",
-        amenities: ["Swimming Pool", "Power Backup"]
+        amenities: ["Swimming Pool", "Power Backup"],
+        contactEmail: "heritage.villas@a360.com",
+        phoneNumber: "+91 98765 00001"
     },
     {
         title: "Cozy Studio PG",
@@ -28,7 +29,9 @@ const sampleProperties = [
         bhk: "1 BHK",
         furnishing: "Fully Furnished",
         status: "approved",
-        amenities: ["Security"]
+        amenities: ["Security"],
+        contactEmail: "stay.cozy@a360.com",
+        phoneNumber: "+91 98765 00002"
     },
     {
         title: "Emerald Heights",
@@ -43,7 +46,9 @@ const sampleProperties = [
         bhk: "2 BHK",
         furnishing: "Semi-Furnished",
         status: "approved",
-        amenities: ["Playground", "Gym"]
+        amenities: ["Playground", "Gym"],
+        contactEmail: "emerald.heights@a360.com",
+        phoneNumber: "+91 98765 00003"
     },
     {
         title: "Urban Independent House",
@@ -58,7 +63,9 @@ const sampleProperties = [
         bhk: "3 BHK",
         furnishing: "Unfurnished",
         status: "approved",
-        amenities: ["Power Backup"]
+        amenities: ["Power Backup"],
+        contactEmail: "urban.living@a360.com",
+        phoneNumber: "+91 98765 00004"
     },
     {
         title: "Sunset Terrace Flat",
@@ -73,7 +80,9 @@ const sampleProperties = [
         bhk: "3 BHK",
         furnishing: "Fully Furnished",
         status: "approved",
-        amenities: ["Security", "Club House"]
+        amenities: ["Security", "Club House"],
+        contactEmail: "sunset.mumbai@a360.com",
+        phoneNumber: "+91 98765 00005"
     },
     {
         title: "Minimalist PG",
@@ -88,7 +97,9 @@ const sampleProperties = [
         bhk: "1 BHK",
         furnishing: "Fully Furnished",
         status: "approved",
-        amenities: ["Power Backup"]
+        amenities: ["Power Backup"],
+        contactEmail: "minimal.stays@a360.com",
+        phoneNumber: "+91 98765 00006"
     },
     {
         title: "Riverside Villa",
@@ -103,9 +114,10 @@ const sampleProperties = [
         bhk: "4 BHK",
         furnishing: "Semi-Furnished",
         status: "approved",
-        amenities: ["Swimming Pool", "Gym"]
+        amenities: ["Swimming Pool", "Gym"],
+        contactEmail: "river.villas@a360.com",
+        phoneNumber: "+91 98765 00007"
     },
-
     {
         title: "Brick-Stone House",
         description: "Vintage look with modern internal fittings.",
@@ -119,7 +131,9 @@ const sampleProperties = [
         bhk: "2 BHK",
         furnishing: "Unfurnished",
         status: "approved",
-        amenities: ["Power Backup"]
+        amenities: ["Power Backup"],
+        contactEmail: "vintage.kolkata@a360.com",
+        phoneNumber: "+91 98765 00008"
     },
     {
         title: "Azure Residences",
@@ -134,7 +148,9 @@ const sampleProperties = [
         bhk: "3 BHK",
         furnishing: "Semi-Furnished",
         status: "approved",
-        amenities: ["Club House", "Gym"]
+        amenities: ["Club House", "Gym"],
+        contactEmail: "azure.noida@a360.com",
+        phoneNumber: "+91 98765 00009"
     },
     {
         title: "Bachelor's Pad",
@@ -149,7 +165,9 @@ const sampleProperties = [
         bhk: "1 BHK",
         furnishing: "Semi-Furnished",
         status: "approved",
-        amenities: ["Security"]
+        amenities: ["Security"],
+        contactEmail: "pune.pads@a360.com",
+        phoneNumber: "+91 98765 00010"
     },
     {
         title: "Grand Royal Villa",
@@ -164,9 +182,10 @@ const sampleProperties = [
         bhk: "4 BHK",
         furnishing: "Fully Furnished",
         status: "approved",
-        amenities: ["Gym", "Swimming Pool", "Club House"]
+        amenities: ["Gym", "Swimming Pool", "Club House"],
+        contactEmail: "royal.jubilee@a360.com",
+        phoneNumber: "+91 98765 00011"
     },
-
     {
         title: "Rustic Farmhouse",
         description: "Peaceful getaway within city limits.",
@@ -180,7 +199,9 @@ const sampleProperties = [
         bhk: "4 BHK",
         furnishing: "Unfurnished",
         status: "approved",
-        amenities: ["Playground"]
+        amenities: ["Playground"],
+        contactEmail: "delhi.rustic@a360.com",
+        phoneNumber: "+91 98765 00012"
     },
     {
         title: "Modern 1BHK Flat",
@@ -195,7 +216,9 @@ const sampleProperties = [
         bhk: "1 BHK",
         furnishing: "Semi-Furnished",
         status: "approved",
-        amenities: ["Security"]
+        amenities: ["Security"],
+        contactEmail: "modern.hitech@a360.com",
+        phoneNumber: "+91 98765 00013"
     },
     {
         title: "Colonial Bungalow",
@@ -210,7 +233,9 @@ const sampleProperties = [
         bhk: "4 BHK",
         furnishing: "Semi-Furnished",
         status: "approved",
-        amenities: ["Power Backup", "Security"]
+        amenities: ["Power Backup", "Security"],
+        contactEmail: "colonial.lucknow@a360.com",
+        phoneNumber: "+91 98765 00014"
     },
     {
         title: "City Center PG",
@@ -225,9 +250,10 @@ const sampleProperties = [
         bhk: "1 BHK",
         furnishing: "Fully Furnished",
         status: "approved",
-        amenities: ["Power Backup"]
+        amenities: ["Power Backup"],
+        contactEmail: "chennai.pg@a360.com",
+        phoneNumber: "+91 98765 00015"
     },
-
     {
         title: "Skyview 2BHK",
         description: "Above the 20th floor with breathtaking views.",
@@ -241,9 +267,10 @@ const sampleProperties = [
         bhk: "2 BHK",
         furnishing: "Semi-Furnished",
         status: "approved",
-        amenities: ["Club House", "Security"]
+        amenities: ["Club House", "Security"],
+        contactEmail: "skyview.mumbai@a360.com",
+        phoneNumber: "+91 98765 00016"
     },
- 
     {
         title: "Executive PG for Women",
         description: "High security and healthy meals provided.",
@@ -257,7 +284,9 @@ const sampleProperties = [
         bhk: "1 BHK",
         furnishing: "Fully Furnished",
         status: "approved",
-        amenities: ["Security", "Power Backup"]
+        amenities: ["Security", "Power Backup"],
+        contactEmail: "executive.pune@a360.com",
+        phoneNumber: "+91 98765 00017"
     },
     {
         title: "Coastal Breeze Apartment",
@@ -272,9 +301,10 @@ const sampleProperties = [
         bhk: "3 BHK",
         furnishing: "Unfurnished",
         status: "approved",
-        amenities: ["Security"]
+        amenities: ["Security"],
+        contactEmail: "coastal.chennai@a360.com",
+        phoneNumber: "+91 98765 00018"
     },
-
     {
         title: "Charming Attic Flat",
         description: "Cozy space with slanted roofs and roof windows.",
@@ -288,7 +318,9 @@ const sampleProperties = [
         bhk: "2 BHK",
         furnishing: "Fully Furnished",
         status: "approved",
-        amenities: ["Security"]
+        amenities: ["Security"],
+        contactEmail: "attic.bangalore@a360.com",
+        phoneNumber: "+91 98765 00019"
     },
     {
         title: "Spacious Duplex",
@@ -303,7 +335,9 @@ const sampleProperties = [
         bhk: "3 BHK",
         furnishing: "Semi-Furnished",
         status: "approved",
-        amenities: ["Power Backup", "Playground"]
+        amenities: ["Power Backup", "Playground"],
+        contactEmail: "spacious.chd@a360.com",
+        phoneNumber: "+91 98765 00020"
     },
     {
         title: "Budget 2BHK",
@@ -318,7 +352,9 @@ const sampleProperties = [
         bhk: "2 BHK",
         furnishing: "Unfurnished",
         status: "approved",
-        amenities: ["Security"]
+        amenities: ["Security"],
+        contactEmail: "budget.delhi@a360.com",
+        phoneNumber: "+91 98765 00021"
     },
     {
         title: "Artist's Retreat Villa",
@@ -333,7 +369,9 @@ const sampleProperties = [
         bhk: "3 BHK",
         furnishing: "Fully Furnished",
         status: "approved",
-        amenities: ["Swimming Pool", "Power Backup"]
+        amenities: ["Swimming Pool", "Power Backup"],
+        contactEmail: "artist.goa@a360.com",
+        phoneNumber: "+91 98765 00022"
     },
     {
         title: "Corporate PG",
@@ -348,9 +386,10 @@ const sampleProperties = [
         bhk: "1 BHK",
         furnishing: "Fully Furnished",
         status: "approved",
-        amenities: ["Gym", "Security"]
+        amenities: ["Gym", "Security"],
+        contactEmail: "corp.pune@a360.com",
+        phoneNumber: "+91 98765 00023"
     },
-    
 ];
 
 module.exports = { data: sampleProperties };

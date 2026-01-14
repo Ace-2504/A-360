@@ -12,6 +12,8 @@ const propertySchema = new Schema({
     price: Number,
     location: String,
     country: String,
+    contactEmail: { type: String, required: true },
+    phoneNumber: { type: String, required: true },
     owner: {
         type: Schema.Types.ObjectId,
         ref: "User",

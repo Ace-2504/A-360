@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { isLoggedIn, isAdmin } = require("../middleware.js");
 const User = require("../models/user.js");
 const passport = require("passport");
 function isPasswordStrong(password) {
@@ -59,7 +60,10 @@ router.post("/login", passport.authenticate("local", {
     failureRedirect: "/login",
     failureFlash: true,
 }), (req, res) => {
-    res.redirect("/");
+    // Redirect to the originally requested URL if present
+    const redirectUrl = req.session.redirectUrl || "/";
+    delete req.session.redirectUrl;
+    res.redirect(redirectUrl);
 });
 
 router.get("/reset-password", (req, res) => {
