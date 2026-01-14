@@ -1,31 +1,91 @@
 <% layout("/layouts/boilerplate") %>
+
 <div class="row mt-3">
     <div class="col-8 offset-2">
-        <h3>List Your Property for A-360 Verification</h3>
-        <form action="/properties" method="POST" novalidate class="needs-validation">
-            <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
-                <input name="property[title]" type="text" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea name="property[description]" class="form-control" rows="3" required></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="image" class="form-label">Image URL</label>
-                <input name="property[image]" type="text" class="form-control" required>
-            </div>
-            <div class="row">
-                <div class="mb-3 col-md-6">
-                    <label for="price" class="form-label">Price</label>
-                    <input name="property[price]" type="number" class="form-control" required>
+        <h1 class="text-center">List Your Property for Rent</h1>
+        <p class="text-center text-muted">Fill accurate details to attract the right tenants</p>
+        
+        <form action="/properties" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
+            
+            <% function renderSection(title, fields) { %>
+                <div class="form-section mb-4 p-3 border rounded bg-white shadow-sm">
+                    <h4 class="mb-3 text-secondary"><%= title %></h4>
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Item / Field</th>
+                                <th>Specification</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% fields.forEach(field => { %>
+                                <tr>
+                                    <td><%= field.label %></td>
+                                    <td class="small text-muted"><%= field.desc %></td>
+                                    <td>
+                                        <% if (field.type === "select") { %>
+                                            <select name="property[<%= field.name %>]" class="form-select form-select-sm" required>
+                                                <option value="">Select</option>
+                                                <% field.options.forEach(opt => { %>
+                                                    <option value="<%= opt %>"><%= opt %></option>
+                                                <% }) %>
+                                            </select>
+                                        <% } else if (field.type === "date") { %>
+                                            <input type="date" name="property[<%= field.name %>]" class="form-control form-control-sm" required>
+                                        <% } else if (field.type === "number") { %>
+                                            <input type="number" name="property[<%= field.name %>]" class="form-control form-control-sm" placeholder="Enter value" required>
+                                        <% } else { %>
+                                            <input type="text" name="property[<%= field.name %>]" class="form-control form-control-sm" placeholder="Enter value" required>
+                                        <% } %>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="mb-3 col-md-6">
-                    <label for="location" class="form-label">Location</label>
-                    <input name="property[location]" type="text" class="form-control" required>
+            <% } %>
+
+            <%- renderSection("Basic Property Details", [
+                { label: "Property Title", desc: "e.g. 2 BHK Semi-Furnished", name: "title" },
+                { label: "Property Type", desc: "Flat/Villa/PG", name: "propertyType", type: "select", options: ["Flat","Villa","Independent House","PG"] },
+                { label: "City", desc: "Current City", name: "city" },
+                { label: "Locality", desc: "Sector / Area", name: "locality" }
+            ]) %>
+
+            <%- renderSection("Configuration & Area", [
+                { label: "BHK Type", desc: "1/2/3/4", name: "bhk", type: "select", options: ["1 BHK","2 BHK","3 BHK","4 BHK"] },
+                { label: "Bedrooms", desc: "Count", name: "bedrooms", type: "number" },
+                { label: "Bathrooms", desc: "Count", name: "bathrooms", type: "number" },
+                { label: "Carpet Area", desc: "Sq. ft", name: "carpetArea", type: "number" }
+            ]) %>
+
+            <%- renderSection("Rent & Payment", [
+                { label: "Monthly Rent", desc: "Amount in ₹", name: "price", type: "number" },
+                { label: "Security Deposit", desc: "Amount in ₹", name: "deposit", type: "number" },
+                { label: "Lease Duration", desc: "Months", name: "leaseDuration", type: "number" }
+            ]) %>
+
+            <div class="form-section mb-4 p-3 border rounded bg-white shadow-sm">
+    <h4 class="mb-3 text-secondary">Society Amenities</h4>
+    <div class="row">
+        <% ["Gym", "Swimming Pool", "Power Backup", "Security", "Club House", "Playground"].forEach(amenity => { %>
+            <div class="col-md-4 mb-2">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="property[amenities]" value="<%= amenity %>" id="<%= amenity %>">
+                    <label class="form-check-label" for="<%= amenity %>"><%= amenity %></label>
                 </div>
             </div>
-            <button class="btn btn-success w-100">Submit to Admin</button>
+        <% }) %>
+    </div>
+</div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload Property Photo</label>
+                <input name="property[image]" type="file" class="form-control" required />
+            </div>
+
+            <button class="btn btn-dark add-btn mt-3 w-100 mb-5">Create Listing</button>
         </form>
     </div>
 </div>

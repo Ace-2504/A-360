@@ -3,29 +3,58 @@ const router = express.Router();
 const Property = require("../models/property");
 const Review = require("../models/review.js");
 const { isLoggedIn, isAdmin } = require("../middleware.js");
+const multer = require("multer");
+const { storage } = require("../cloudConfig.js"); 
+const upload = multer({ storage });
 
 router.get("/", async (req, res) => {
-    const allProperties = await Property.find({ status: "approved" });
-    res.render("properties/index.ejs", { allProperties });
+    try {
+        const { city, propertyType, bhk, maxPrice } = req.query;
+        
+        let filter = { status: "approved" };
+
+        if (city && city.trim() !== "") {
+            filter.city = { $regex: city.trim(), $options: "i" };
+        }
+        if (propertyType) {
+            filter.propertyType = propertyType;
+        }
+        if (bhk) {
+            filter.bhk = bhk;
+        }
+
+        if (maxPrice && maxPrice !== "") {
+            const numericMaxPrice = Number(maxPrice);
+            if (!isNaN(numericMaxPrice)) {
+                filter.price = { $lte: numericMaxPrice };
+            }
+        }
+
+        const allProperties = await Property.find(filter).populate("owner");
+        
+        res.render("properties/index.ejs", { allProperties, filters: req.query });
+
+    } catch (err) {
+        console.error("Filter Error:", err);
+        res.redirect("/properties");
+    }
 });
 
 router.get("/new", isLoggedIn, (req, res) => {
     res.render("properties/new.ejs");
 });
 
-router.post("/", isLoggedIn, async (req, res) => {
-    try {
-        const newProperty = new Property(req.body.property);
-        newProperty.owner = req.user._id;
-        newProperty.image = { url: req.body.property.image, filename: "propimg" };
-        
-        await newProperty.save();
-        req.flash("success", "Property submitted for A-360 verification!");
-        res.redirect("/properties");
-    } catch (e) {
-        req.flash("error", e.message);
-        res.redirect("/properties/new");
-    }
+router.post("/", isLoggedIn, upload.single("property[image]"), async (req, res) => { 
+    const newProperty = new Property(req.body.property); 
+    
+    newProperty.owner = req.user._id;
+    newProperty.image = { url: req.file.path, filename: req.file.filename };
+    
+    newProperty.status = "pending"; 
+
+    await newProperty.save();
+    req.flash("success", "Property submitted for verification!");
+    res.redirect("/properties");
 });
 
 router.get("/my-submissions", isLoggedIn, async (req, res) => {
@@ -39,17 +68,17 @@ router.get("/my-submissions", isLoggedIn, async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-    try {
+    
         const { id } = req.params;
-        const property = await Property.findById(id).populate("owner");
+        const property = await Property.findById(id).populate({
+            path: "reviews",
+            populate: { path: "author" }
+        }) .populate("owner");
         if (!property) {
             req.flash("error", "Property not found!");
             return res.redirect("/properties");
         }
         res.render("properties/show.ejs", { property });
-    } catch (e) {
-        res.redirect("/properties");
-    }
 });
 
 router.get("/admin/dashboard", isLoggedIn, isAdmin, async (req, res) => {
