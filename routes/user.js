@@ -23,7 +23,7 @@ function isPasswordStrong(password) {
     if (!hasNumber) return "Password must include at least one number.";
     if (!hasSpecialChar) return "Password must include at least one special character.";
 
-    return null; // Return null if everything is perfect
+    return null; 
 }
 
 router.get("/signup", (req, res) => {
@@ -43,8 +43,7 @@ router.post("/signup", async (req, res) => {
         const registeredUser = await User.register(newUser, password);
         req.login(registeredUser, (err) => {
             if (err) return next(err);
-            req.flash("success", "Welcome to A-360!");
-            res.redirect("/properties");
+            res.redirect("/");
         });
     } catch (e) {
         req.flash("error", e.message);
@@ -60,8 +59,7 @@ router.post("/login", passport.authenticate("local", {
     failureRedirect: "/login",
     failureFlash: true,
 }), (req, res) => {
-    req.flash("success", "Welcome back to the Ecosystem!");
-    res.redirect("/properties");
+    res.redirect("/");
 });
 
 router.get("/reset-password", (req, res) => {

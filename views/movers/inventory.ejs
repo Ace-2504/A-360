@@ -1,0 +1,157 @@
+<% layout("/layouts/boilerplate") %>
+<link rel="stylesheet" href="/css/inventory.css">
+
+<div class="container my-5">
+    <h1 class="text-center">Household Inventory Details</h1>
+    <p class="text-center text-muted mb-5">Provide accurate details to get an online quotation without a site visit.</p>
+
+    <form action="/submit-inventory" method="POST">
+        <% function inventoryTable(title, items) { %>
+            <section class="inventory-section mb-5 p-4 bg-white shadow-sm rounded">
+                <h2 class="h4 mb-3 border-bottom pb-2"><%= title %></h2>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="width: 30%;">Item Name</th>
+                                <th style="width: 30%;">Description / Specification</th>
+                                <th style="width: 15%;">Qty</th>
+                                <th style="width: 25%;">Comments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% items.forEach(item => { %>
+                                <tr>
+                                    <td><%= item.name %></td>
+                                    <td class="small text-secondary"><%= item.desc %></td>
+                                    <td>
+                                        <input type="number" name="qty[]" min="0" class="form-control" placeholder="0">
+                                    </td>
+                                    <td>
+                                        <input type="text" name="comments[]" class="form-control" placeholder="Notes">
+                                    </td>
+                                    <input type="hidden" name="itemName[]" value="<%= item.name %>">
+                                    <input type="hidden" name="itemDesc[]" value="<%= item.desc %>">
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        <% } %>
+
+        <%- inventoryTable("🏠 Living Room / Drawing Room", [
+            { name: "Sofa Set", desc: "1/2/3 seater / L-shape" },
+            { name: "Single Chairs", desc: "Wooden / Plastic / Metal" },
+            { name: "Center Table", desc: "Wooden / Glass-top" },
+            { name: "Side Tables", desc: "Bedside / Corner" },
+            { name: "TV", desc: "<40″ / 40–55″ / >55″" },
+            { name: "TV Unit", desc: "Wooden / Modular" },
+            { name: "Bookshelf", desc: "Small / Large" },
+            { name: "Display Cabinet", desc: "Glass / Wooden" },
+            { name: "Curtains", desc: "No. of windows" },
+            { name: "Carpets / Rugs", desc: "Small / Medium / Large" },
+            { name: "Wall Frames", desc: "Framed / Photos" }
+        ]) %>
+
+        <%- inventoryTable("🛏️ Bedroom Items", [
+            { name: "Bed", desc: "Single / Double / King" },
+            { name: "Mattress", desc: "Foam / Spring / Coir" },
+            { name: "Wardrobe", desc: "2-door / 3-door / Sliding" },
+            { name: "Dressing Table", desc: "With / Without mirror" },
+            { name: "Study Table", desc: "Wooden / Metal" },
+            { name: "Chair", desc: "Office / Plastic" },
+            { name: "Bedside Table", desc: "Small / Large" },
+            { name: "Iron Stand", desc: "Portable" },
+            { name: "Mirror", desc: "Wall / Standing" }
+        ]) %>
+
+        <%- inventoryTable("🍳 Kitchen Items", [
+            { name: "Refrigerator", desc: "Single / Double / Side-by-side" },
+            { name: "Washing Machine", desc: "Top / Front Load" },
+            { name: "Microwave / OTG", desc: "Standard" },
+            { name: "Gas Stove", desc: "2/3/4 Burner" },
+            { name: "Gas Cylinder", desc: "Filled / Empty" },
+            { name: "Water Purifier", desc: "Wall-mounted" },
+            { name: "Crockery", desc: "Small / Medium / Large boxes" },
+            { name: "Utensils", desc: "Light / Medium / Heavy" }
+        ]) %>
+
+        <%- inventoryTable("⚡ Appliances & Electronics", [
+            { name: "Air Conditioner", desc: "Split / Window" },
+            { name: "Geyser", desc: "Wall-mounted" },
+            { name: "Ceiling Fan", desc: "Standard" },
+            { name: "Inverter", desc: "With / Without battery" },
+            { name: "Desktop Computer", desc: "With CPU" },
+            { name: "Laptop", desc: "Portable" },
+            { name: "Printer / Scanner", desc: "Home/Office" }
+        ]) %>
+
+        <%- inventoryTable("🧺 Storage, Clothing & Outdoor", [
+            { name: "Suitcases", desc: "Small / Medium / Large" },
+            { name: "Books", desc: "Few / Medium / Heavy" },
+            { name: "Plants", desc: "Small / Medium / Large" },
+            { name: "Bicycle", desc: "Adult / Kids" },
+            { name: "Two-Wheeler", desc: "Scooter / Bike" },
+            { name: "Gym Equipment", desc: "Treadmill / Weights" }
+        ]) %>
+
+        <%- inventoryTable("💎 Fragile & High-Value Items", [
+            { name: "Glass Tables", desc: "Requires wooden crate" },
+            { name: "Paintings", desc: "Framed / Canvas" },
+            { name: "Aquarium", desc: "With / Without water" },
+            { name: "Antiques", desc: "Insurance recommended" },
+            { name: "Home Temple", desc: "Marble / Wooden" }
+        ]) %>
+
+        <section class="inventory-section mb-5 p-4 bg-white shadow-sm rounded">
+            <h2 class="h4 mb-3 border-bottom pb-2">➕ Add Your Own Items</h2>
+            <table class="table" id="customItemsTable">
+                <thead class="table-light">
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Description</th>
+                        <th>Qty</th>
+                        <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" name="customItemName[]" class="form-control" placeholder="e.g. Piano"></td>
+                        <td><input type="text" name="customItemDesc[]" class="form-control" placeholder="Details"></td>
+                        <td><input type="number" name="customItemQty[]" min="0" class="form-control" placeholder="0"></td>
+                        <td><input type="text" name="customItemComments[]" class="form-control"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-outline-primary btn-sm" onclick="addCustomRow()">➕ Add Another Item</button>
+        </section>
+
+        <div class="declaration bg-light p-4 rounded text-center mb-4">
+            <div class="form-check d-inline-block">
+                <input class="form-check-input" type="checkbox" id="agree" required>
+                <label class="form-check-label" for="agree">
+                    I confirm that the above list accurately represents the items to be moved.
+                </label>
+            </div>
+        </div>
+
+        <div class="text-center mb-5">
+            <button type="submit" class="btn btn-success btn-lg px-5">Get Final Quotation</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function addCustomRow() {
+        const table = document.getElementById("customItemsTable").querySelector("tbody");
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td><input type="text" name="customItemName[]" class="form-control" placeholder="Item name"></td>
+            <td><input type="text" name="customItemDesc[]" class="form-control" placeholder="Description"></td>
+            <td><input type="number" name="customItemQty[]" min="0" class="form-control" placeholder="0"></td>
+            <td><input type="text" name="customItemComments[]" class="form-control"></td>
+        `;
+        table.appendChild(row); 
+    }
+</script>

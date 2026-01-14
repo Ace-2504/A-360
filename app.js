@@ -55,20 +55,23 @@ app.use((req, res, next) => {
 });
 passport.use(new LocalStrategy(User.authenticate()));
 
-app.use("/properties", propertyRouter);
+app.get("/", (req, res) => {
+    res.render("home"); 
+});
 app.use("/", userRouter);
+app.use("/properties", propertyRouter);
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 main().catch((err) => console.log(err));
 
-app.get("/", (req, res) => {
-    res.redirect("/properties");
-});
-
 app.get("/properties", (req, res) => {
     res.render("properties/index.ejs", { currentUser: null });
+});
+
+app.get("/inventory", (req, res) => {
+    res.render("movers/inventory"); 
 });
 
 app.listen(8080, () => {

@@ -53,7 +53,6 @@ router.post("/", isLoggedIn, upload.single("property[image]"), async (req, res) 
     newProperty.status = "pending"; 
 
     await newProperty.save();
-    req.flash("success", "Property submitted for verification!");
     res.redirect("/properties");
 });
 
