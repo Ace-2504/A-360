@@ -26,7 +26,7 @@
                             </td>
                             <td><%= prop.owner ? prop.owner.username : "Unknown" %></td>
                             <td><%= prop.location %></td>
-                            <td>$<%= prop.price %></td>
+                            <td>₹<%= prop.price %></td>
                             <td>
                                 <div class="d-flex gap-2">
                                     <form action="/properties/<%= prop._id %>/approve" method="POST">
