@@ -1,8 +1,8 @@
 <% layout("/layouts/boilerplate") %>
 <div class="row mt-3">
-    <h2 class="col-6 offset-3">Create A-360 Account</h2>
+    <h1 class="col-6 offset-3">Reset Password</h1>
     <div class="col-6 offset-3">
-        <form action="/signup" method="POST" class="needs-validation" novalidate>
+        <form action="/reset-password" method="POST" class="needs-validation" novalidate>
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input name="username" id="username" type="text" class="form-control" required>
@@ -12,17 +12,15 @@
                 <input name="email" id="email" type="email" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label for="password" class="form-label">New Password</label>
                 <input name="password" id="password" type="password" class="form-control" required>
             </div>
-            <!-- <div class="mb-3">
-                <label for="role" class="form-label">I am a...</label>
-                <select name="role" class="form-select">
-                    <option value="user">Relocator (User)</option>
-                    <option value="admin">Platform Verifier (Admin)</option>
-                </select>
-            </div> -->
-            <button class="btn btn-success w-100">Sign Up</button>
+            <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                <input name="confirmPassword" id="confirmPassword" type="password" class="form-control" required>
+                <div class="form-text">Both passwords must match and meet strong conditions.</div>
+            </div>
+            <button class="btn btn-success">Update Password</button>
         </form>
     </div>
 </div>
