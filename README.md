@@ -9,14 +9,15 @@
 5. [Functional Requirements](#functional-requirements)
 6. [Non-Functional Requirements](#non-functional-requirements)
 7. [Repository Layout](#repository-layout)
-8. [Installation and Setup](#installation-and-setup)
-9. [Usage](#usage)
-10. [API Endpoints](#api-endpoints)
-11. [System Design and Request Flow](#system-design-and-request-flow)
-12. [Future Features](#future-features)
-13. [Contributing](#contributing)
-14. [License](#license)
-15. [Acknowledgements](#acknowledgements)
+8. [Project Demo](#project-demo)
+9. [Installation and Setup](#installation-and-setup)
+10. [Usage](#usage)
+11. [API Endpoints](#api-endpoints)
+12. [System Design and Request Flow](#system-design-and-request-flow)
+13. [Future Features](#future-features)
+14. [Contributing](#contributing)
+15. [License](#license)
+16. [Acknowledgements](#acknowledgements)
 
 ## Overview
 
@@ -78,6 +79,10 @@ Business rules and permission checks are enforced server-side for security and c
 - `public/` — Static assets (CSS, JS, images)
 - `middleware.js` — Custom middleware for authentication, validation, and ownership checks
 - `cloudConfig.js` — Cloudinary configuration
+
+## Project Demo
+
+[Demo Video](https://drive.google.com/file/d/11tFzbgsSBsqKyN2Pw6DhfXNaLYevJqE9/view?usp=sharing)
 
 ## Installation and Setup
 
